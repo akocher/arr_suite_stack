@@ -33,7 +33,7 @@ services:
       - VPN_TYPE=openvpn # or wireguard
       - OPENVPN_USER=abc
       - OPENVPN_PASSWORD=abc
-      - SERVER_COUNTRIES=Netherlands
+      - SERVER_COUNTRIES=America
       - HEALTH_VPN_DURATION_INITIAL=120s
     healthcheck:
       test: ping -c 1 www.google.com || exit 1
@@ -51,7 +51,7 @@ services:
     environment:
       - LOG_LEVEL=info
       - HEALTH_SERVER_ADDRESS=127.0.0.1:9999
-      - TZ=America/Los_Angeles
+      - TZ=America/Denver
     restart: always
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -67,7 +67,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=America/Los_Angeles
+      - TZ=America/Denver
       - WEBUI_PORT=8080
       - TORRENTING_PORT=6881
     volumes:
@@ -87,7 +87,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=America/Los_Angeles
+      - TZ=America/Denver
       - NZBGET_USER=user
       - NZBGET_PASS=password
     volumes:
@@ -103,7 +103,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=America/Los_Angeles
+      - TZ=America/Denver
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /docker/prowlarr:/config
@@ -117,7 +117,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=America/Los_Angeles
+      - TZ=America/Denver
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /docker/sonarr:/config
@@ -132,7 +132,7 @@ services:
     environment:
       - PUID=1000
       - PGID=100
-      - TZ=America/Los_Angeles
+      - TZ=America/Denver
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /docker/radarr:/config
@@ -151,7 +151,7 @@ services:
     environment:
      - PUID=1000
      - PGID=1000
-     - TZ=America/Los_Angeles
+     - TZ=America/Denver
     ports:
       - 8686:8686
   
@@ -162,7 +162,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=America/Los_Angeles
+      - TZ=America/Denver
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /docker/bazarr:/config
@@ -176,7 +176,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=America/Los_Angeles
+      - TZ=America/Denver
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /docker/readarr:/config
