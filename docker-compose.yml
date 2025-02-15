@@ -13,10 +13,10 @@ services:
     devices:
       - /dev/net/tun:/dev/net/tun
     ports:
-      - 8080:8080 # qbittorrent web interface
-      - 6881:6881 # qbittorrent torrent port
-      - 6789:6789 # nzbget
-      - 9696:9696 # prowlarr
+      - 8080:8080  # qBittorrent Web UI
+      - 6881:6881  # Torrent port (TCP)
+      - 6789:6789  # NZBGet
+      - 9696:9696  # Prowlarr
     volumes:
       - /docker/gluetun:/gluetun
     environment:
@@ -31,12 +31,16 @@ services:
     #  - SERVER_CITIES=city
       - VPN_SERVICE_PROVIDER=nordvpn
       - VPN_TYPE=openvpn # or wireguard
-      - OPENVPN_USER=abc
-      - OPENVPN_PASSWORD=abc
-      - SERVER_COUNTRIES=America
+      - OPENVPN_USER=xxxxxxxxxxxx
+      - OPENVPN_PASSWORD=xxxxxxxxxxxxxxx
+      - SERVER_COUNTRIES=United States
+      - SERVER_CITIES=Denver
       - HEALTH_VPN_DURATION_INITIAL=120s
+      - DOT=off
+      - DNS_OVER_TLS=off
+      - VPN_DNS=1.1.1.1,8.8.8.8
     healthcheck:
-      test: ping -c 1 www.google.com || exit 1
+      test: wget -q --spider https://www.google.com || exit 1
       interval: 60s
       timeout: 20s
       retries: 5
@@ -63,7 +67,7 @@ services:
     container_name: qbittorrent
     restart: unless-stopped
     labels:
-      - deunhealth.restart.on.unhealthy= "true"
+      - deunhealth.restart.on.unhealthy="true"
     environment:
       - PUID=1000
       - PGID=1000
@@ -75,11 +79,12 @@ services:
       - /data:/data
     network_mode: service:gluetun
     healthcheck:
-        test: ping -c 1 www.google.com || exit 1
-        interval: 60s
-        retries: 3
-        start_period: 20s
-        timeout: 10s
+      test: curl -fsSL https://www.google.com || exit 1
+      interval: 60s
+      retries: 3
+      start_period: 20s
+      timeout: 10s
+
 
   nzbget:
     image: lscr.io/linuxserver/nzbget:latest
