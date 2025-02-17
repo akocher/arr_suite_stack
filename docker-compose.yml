@@ -40,7 +40,7 @@ services:
       - DNS_OVER_TLS=off
       - VPN_DNS=1.1.1.1,8.8.8.8
     healthcheck:
-      test: wget -q --spider https://www.google.com || exit 1
+      test: wget -q --spider https://www.google.com || exit 1 #using wget instead of ping or curl as they aren't always installed in some lXc containers
       interval: 60s
       timeout: 20s
       retries: 5
@@ -79,7 +79,7 @@ services:
       - /data:/data
     network_mode: service:gluetun
     healthcheck:
-      test: curl -fsSL https://www.google.com || exit 1
+      test: wget -q --spider https://www.google.com || exit 1 #using wget instead of ping or curl as they aren't always installed in some lXc containers
       interval: 60s
       retries: 3
       start_period: 20s
