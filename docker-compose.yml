@@ -201,7 +201,7 @@ services:
     restart: unless-stopped
     
   readarr2:
-    image: ghcr.io/linuxserver/readarr:0.4.19-nightly
+    image: ghcr.io/linuxserver/readarr:0.4.19-nightly # use nightly or latest; develop is sometimes missing
     platform: linux/amd64
     container_name: readarr2
     environment:
