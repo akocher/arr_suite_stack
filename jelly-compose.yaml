@@ -1,4 +1,4 @@
-# works great as of 2/16/2025
+# works great as of 10/14/2025
 services:
   jellyfin:
     container_name: jellyfin
@@ -6,9 +6,10 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=America/Los_Angeles
+      - TZ=America/Denver
     volumes:
       - /docker/jellyfin:/config
+      - /docker/jellyfin/cache:/cache
       - /data:/data
     ports:
       - 8096:8096
