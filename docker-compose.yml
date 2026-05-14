@@ -37,9 +37,10 @@ services:
       - SERVER_COUNTRIES=United States
       - SERVER_CITIES=Denver
       - HEALTH_VPN_DURATION_INITIAL=120s
-      - DOT=off
-      - DNS_OVER_TLS=off
-      - VPN_DNS=1.1.1.1,8.8.8.8
+     # - DOT=off
+     # - DNS_OVER_TLS=off
+     # - VPN_DNS=1.1.1.1,8.8.8.8
+     # - DNS_SERVER=off
     healthcheck:
       test: wget -q --spider https://www.google.com || exit 1
       interval: 60s
@@ -97,8 +98,8 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=America/Denver
-      - NZBGET_USER=#{NZBGET_USER}
-      - NZBGET_PASS=#{NZBGET_PASS}
+      - NZBGET_USER=user
+      - NZBGET_PASS=password
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /docker/nzbget:/config
@@ -201,7 +202,7 @@ services:
     restart: unless-stopped
     
   readarr2:
-    image: ghcr.io/linuxserver/readarr:0.4.19-nightly # use nightly or latest; develop is sometimes missing
+    image: ghcr.io/linuxserver/readarr:0.4.19-nightly
     platform: linux/amd64
     container_name: readarr2
     environment:
